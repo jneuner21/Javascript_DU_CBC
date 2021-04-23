@@ -13,6 +13,9 @@ var specialCharacterBox= document.querySelector("#specialCharacters:checked") ==
 
 var closeButton = document.querySelector("#Close")
 
+var randomizer = Math.floor(Math.random() * lowerCase.length);
+console.log(randomizer)
+
 //var randomChoice = ComputerChoice[index];
 
 // Write password to the #password input
