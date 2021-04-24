@@ -6,17 +6,9 @@ var upperCase= ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
 var numeric= ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 var specialCharacter= ["!", "#", "$", "%", "&", "(", ")", "*", "+", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "_", "~"]
 
-var lowerCaseBox= document.querySelector("#lowerCase:checked") == null;
-var upperCaseBox= document.querySelector("#upperCase:checked") == null;
-var numericBox= document.querySelector("#numeric:checked") == null;
-var specialCharacterBox= document.querySelector("#specialCharacters:checked") ==null;
-
 var closeButton = document.querySelector("#Close")
 
-var randomizer = Math.floor(Math.random() * lowerCase.length);
-console.log(randomizer)
-
-//var randomChoice = ComputerChoice[index];
+var randomizer = Math.floor(Math.random() * lowerCase.length)
 
 // Write password to the #password input
 function writePassword() {
@@ -25,14 +17,33 @@ function writePassword() {
 
   //passwordText.value = password;
   modal.style.display = "block";
-
 }
-
-
 
 generateBtn.addEventListener("click", writePassword);
 closeButton.addEventListener("click", close);
-generateCriteria.addEventListener("click", close);
+generateCriteria.addEventListener("click", createPassword);
+
+function createPassword(){
+  var lowerCaseBox= document.getElementById("lowerCase").checked;
+  var upperCaseBox= document.getElementById("upperCase").checked;
+  var numericBox= document.getElementById("numeric").checked;
+  var specialCharacterBox= document.getElementById("specialCharacters").checked;
+  var sliderValue= document.getElementById("characterSlider").value
+  var combinedArray= []
+    if (lowerCaseBox) combinedArray= lowerCase.concat(combinedArray);
+    if (upperCaseBox) combinedArray= upperCase.concat(combinedArray);
+    if (numericBox) combinedArray= numeric.concat(combinedArray);
+    if (specialCharacterBox) combinedArray= specialCharacter.concat(combinedArray);
+   
+    if (sliderValue >= 8 && sliderValue <= 128)
+    var randomItem=""
+    for(var i= 0; i< sliderValue; i++){
+      randomItem= randomItem + combinedArray[Math.floor(Math.random() * combinedArray.length)]
+    }
+    close()
+    
+    document.querySelector("#password").textContent= randomItem
+}
 
 function close(){
   modal.style.display = "none"
